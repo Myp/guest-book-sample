@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.*;
 /**
- * Created by daniil on 07.10.16.
+ * Created by daniil on 15.10.16.
  */
 public class Message {
 

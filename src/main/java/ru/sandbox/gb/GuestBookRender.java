@@ -7,7 +7,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 /**
- * Created by daniil on 07.10.16.
+ * Created by daniil on 15.10.16.
  */
 public class GuestBookRender {
 

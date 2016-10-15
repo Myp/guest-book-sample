@@ -6,11 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-//import java.io.OutputStream;
-//import java.nio.charset.Charset;
 
 /**
- * Created by dmitry on 02.10.16.
+ * Created by daniil on 15.10.16.
  */
 public class GuestBookServlet extends HttpServlet {
 
