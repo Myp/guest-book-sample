@@ -10,8 +10,34 @@
         <servlet-class>ru.sandbox.gb.GuestBookServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>StaticFiles</servlet-name>
+        <servlet-class>ru.sandbox.gb.StaticFilesServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>GuestBookLogin</servlet-name>
+        <servlet-class>ru.sandbox.gb.GuestBookLoginServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>GuestBook</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GuestBookLogin</servlet-name>
+        <url-pattern>/login/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>StaticFiles</servlet-name>
+        <url-pattern>/assets/*</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
 </web-app>

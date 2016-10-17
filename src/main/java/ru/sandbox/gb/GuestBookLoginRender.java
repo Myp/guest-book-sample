@@ -1,20 +1,21 @@
 package ru.sandbox.gb;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
-import java.util.List;
+        import javax.servlet.http.HttpServletResponse;
+        import javax.servlet.http.HttpSession;
+        import java.io.IOException;
+        import java.io.OutputStream;
+        import java.nio.charset.Charset;
+        import java.util.List;
 
 /**
  * Created by daniil on 15.10.16.
  */
-public class GuestBookRender {
+public class GuestBookLoginRender {
 
-    private GuestBookRender() {
+    private GuestBookLoginRender() {
     }
 
-    public static void renderPage(List<Message> message, HttpServletResponse resp) throws IOException {
+    public static void renderPage(List<Message> message, HttpServletResponse resp, String username) throws IOException {
 
         resp.setContentType("text/html");
         OutputStream os = resp.getOutputStream();
@@ -34,15 +35,14 @@ public class GuestBookRender {
         sb.append("<div class='title'>Guest Book</div>");
         sb.append("<div class='end'></div></div>");
 
-        sb.append("<form method='POST'>");
+
         sb.append("<div class='menu'>");
-        sb.append("<div><input type='text' name='user' id='user' placeholder='Пользователь'></div>");
-        sb.append("<div><input type='text' name='password' id='password' placeholder='Пароль'></div>");
-        sb.append("<div><input type='submit' value='Войти' id='login'/></div>");
-        sb.append("<div class='end'></div></div>");
+        sb.append("<div class='name'>");
+        sb.append(username).append("</div>");
+        sb.append("<form method='POST'>");
+        sb.append("<div><textarea name='body' id='body' placeholder='Ваше сообщение'></textarea></div>");
+        sb.append("<div><input type='submit' value='Отправить' id='button'/></div></div>");
         sb.append("</form>");
-       // sb.append("<div><textarea name='body' id='body' placeholder='Ваше сообщение'></textarea></div>");
-       // sb.append("<div><input type='submit' value='Отправить' id='button'/></div></div>");
 
         renderMessages(sb, message);
 

@@ -6,11 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by daniil on 15.10.16.
  */
-public class GuestBookServlet extends HttpServlet {
+public class GuestBookLoginServlet extends HttpServlet {
 
     private MessageStorage storage;
 
@@ -21,27 +22,33 @@ public class GuestBookServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        GuestBookRender.renderPage(storage.getMessages(), resp);
+
+        HttpSession session = req.getSession();
+        UserInfo User = (UserInfo) session.getAttribute("userInfo");
+
+        if  ((User != null)&(User.getUser()!="")){
+            GuestBookLoginRender.renderPage(storage.getMessages(), resp, User.getUser());
+        } else{
+            resp.sendRedirect("http://localhost:8080/");
+        }
+
         req.setCharacterEncoding("UTF-8");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        UserInfo User = (UserInfo) session.getAttribute("userInfo");
+
         req.setCharacterEncoding("UTF-8");
 
-        HttpSession session = req.getSession();
-        UserInfo User = new UserInfo();
-        session.setAttribute("userInfo", User);
+        Message newMessage = Message.fromRequest(req, User.getUser());
 
-        User.login(req.getParameter("user"));
+        if (newMessage != null) {
+            storage.store(newMessage);
+        }
 
-        resp.sendRedirect("http://localhost:8080/login/");
-
-//        Message newMessage = Message.fromRequest(req);
-//        if (newMessage != null) {
-//            storage.store(newMessage);
-//        }
-//        GuestBookRender.renderPage(storage.getMessages(), resp);
+        GuestBookLoginRender.renderPage(storage.getMessages(), resp, User.getUser());
 
     }
 }

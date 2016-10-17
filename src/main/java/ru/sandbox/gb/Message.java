@@ -1,8 +1,8 @@
 package ru.sandbox.gb;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.Instant;
-import java.time.LocalDate;
+//import java.time.Instant;
+//import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.*;
@@ -52,10 +52,10 @@ public class Message {
         return body;
     }
 
-    public static Message fromRequest(HttpServletRequest req) {
+    public static Message fromRequest(HttpServletRequest req, String name) {
         LocalDateTime dateTime = LocalDateTime.now();
 
-        String user = req.getParameter("user");
+        String user = name;
         String body = req.getParameter("body");
         String time = dateTime.format(DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss"));
 
